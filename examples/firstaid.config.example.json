@@ -1,0 +1,50 @@
+{
+  "_comment": "firstaid 配置对照示例。本工具不读配置文件：所有值都通过环境变量（或 CLI 参数）传入。路径用 <...> 占位，请按自己的环境替换。",
+  "resolve": "优先级：CLI 参数 > 环境变量 > 内置默认（数据根：FIRSTAID_HOME > DSH_HOME > ~/.dsh）",
+  "paths": {
+    "FIRSTAID_HOME": "<数据根，默认 ~/.dsh>",
+    "DSH_HOME": "<数据根别名（兼容既有部署）>",
+    "FIRSTAID_WORKSPACE": "<工作区根；工具链/文档树所在处，未配置则不猜>",
+    "FIRSTAID_LOGS": "<日志目录，默认 <数据根>/logs>",
+    "FIRSTAID_CHANGELOG": "<变更流水目录（时间轴数据源），默认 <数据根>/changelog>",
+    "FIRSTAID_ARCHIVE_ROOT": "<回滚点根，默认 <数据根>/_archive>",
+    "FIRSTAID_LANDING": "<恢复脚本落地目录，默认 <数据根>/landing>",
+    "FIRSTAID_ROLLBACK_ROOT": "<冷盘上的回滚点镜像根，默认 <数据根>/rollback-points>",
+    "ROLLBACK_POINTS_ROOT": "<同上（另一写法，优先）>",
+    "FIRSTAID_KB_DIR": "<历史线索目录（自愈报告/知识库），默认 <数据根>/repair-knowledge>"
+  },
+  "service": {
+    "FIRSTAID_PORT": "3080",
+    "FIRSTAID_OTHER_PORTS": "<逗号分隔的其它实例端口，默认空>",
+    "FIRSTAID_LOG_PATTERN": "<启动日志文件名正则，默认任意 *.log>",
+    "FIRSTAID_GUARD_PATTERN": "guard",
+    "FIRSTAID_GUARD_STATE": "<守护进程状态文件，默认 <数据根>/guard/guard-state.json>",
+    "FIRSTAID_GUARD_LOG": "<守护进程日志，默认 <数据根>/guard/guard.log>"
+  },
+  "backup_roots": {
+    "FIRSTAID_COLD_ROOTS": "冷盘=<盘>:\\<离线盘内的目录>;密钥=<盘>:\\keys",
+    "_note": "也接受 JSON 数组形态：[{\"name\":\"冷盘\",\"root\":\"<路径>\"}]；未配置时报告写「未配置」，不假装有备份",
+    "FIRSTAID_MIRROR_ROOTS": "镜像仓=<路径>;归档=<路径>",
+    "FIRSTAID_BACKUP_SOURCES": "[{\"category\":\"配置/预设\",\"target\":\"加密备份仓\",\"note\":\"按你的介质填\"}]"
+  },
+  "rules": {
+    "FIRSTAID_IMPACT_RULES": "[{\"name\":\"配置/预设\",\"pattern\":\"\\\\.preset|settings\\\\.ya?ml\"},{\"name\":\"依赖\",\"pattern\":\"node_modules\"}]",
+    "FIRSTAID_STOP_PATTERNS": "supervisor[^\\\\n]{0,20}\\\\bstop\\\\b;stop-service",
+    "FIRSTAID_RESTART_PATTERNS": "\\\\brestart;taskkill",
+    "FIRSTAID_DEVICE_TAGS": "<设备短码，逗号分隔；时间轴标题里会被剥离，默认空>"
+  },
+  "test_injection": {
+    "_note": "只在跑单测时使用；未配置则相应用例跳过（不会去动任何目录）",
+    "FIRSTAID_TEST_HOST_PKG": "<宿主包目录，用来验证「宿主包被改名后本工具仍能跑」>",
+    "FIRSTAID_TEST_TARGET_FILES": "<被诊断对象文件清单，分号分隔；用于「目标零改动」hash 断言>",
+    "FIRSTAID_TEST_REF_LOGS": "<参照日志目录，用来验证「日志没有误写进真实目录」>"
+  },
+  "build_injection": {
+    "_note": "只在跑 scripts/verify-source.mjs 时使用；**绝不写进仓库**，多值分隔符 , ; | 三者等价",
+    "BUILD_MACHINE_NAMES": "<机器名/主机短码>",
+    "BUILD_USER_NAMES": "<用户名>",
+    "BUILD_PERSONAL_TERMS": "<私人称呼/角色词>",
+    "BUILD_INTERNAL_TERMS": "<内部组件名/项目代号>",
+    "BUILD_LAYOUT_ROOTS": "<本机目录布局名>"
+  }
+}

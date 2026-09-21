@@ -1,0 +1,48 @@
+{
+  "name": "firstaid",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "只读诊断 + 回滚演练的急救台：把「起不来 / 假死 / 要撤销改动 / 数据被删」压成一个入口，产出可整段交给 AI 或同事的现场体检报告（零第三方依赖）",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "bin": {
+    "firstaid": "firstaid.mjs",
+    "firstaid-timeline": "timeline.mjs",
+    "firstaid-drill": "drill.mjs",
+    "firstaid-rollback-index": "rollback-index.mjs"
+  },
+  "scripts": {
+    "verify": "node scripts/verify-source.mjs .",
+    "test": "node _test/test-firstaid-run.mjs",
+    "test:drill": "node _test/test-drill.mjs",
+    "test:index": "node _test/test-rollback-index.mjs"
+  },
+  "files": [
+    "firstaid.mjs",
+    "timeline.mjs",
+    "drill.mjs",
+    "rollback-index.mjs",
+    "firstaid-launch.ps1",
+    "lib/",
+    "scripts/",
+    "_test/",
+    "examples/",
+    "docs/RELEASING.md",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "diagnostics",
+    "incident-response",
+    "runbook",
+    "rollback",
+    "drill",
+    "zero-dependency"
+  ],
+  "dependencies": {},
+  "devDependencies": {}
+}

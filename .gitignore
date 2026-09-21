@@ -1,0 +1,13 @@
+# ── 本工具自身产生的运行数据（各环境自己的事，不入仓）──
+logs/
+landing/
+changelog-local/
+_archive/
+.backups/
+*.log
+
+# ── 通用 ──
+node_modules/
+.DS_Store
+Thumbs.db
+*.tmp
