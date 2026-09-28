@@ -12,6 +12,22 @@
 
 ---
 
+## 设计依据
+
+本工具是「[ops-handoff-design](https://github.com/kira905/ops-handoff-design)」所述运维体系的一个实现，
+设计依据（对应文档仓约定的固定四问）：
+
+- **它为什么存在、边界在哪** → 见《体系全景与家规》**§4 家规**（其中"回滚演练"那条纪律要求：**没演练过的恢复脚本不许列进一键执行**——本工具的 L1/L2/L3 三档演练与"只诊断优先"正是这条纪律的实现），以及《放行判据与开关矩阵》**§3 执行矩阵**（动作 → 风险级 → 开关 → 护栏 → 放行判据：不可逆动作必须有人确认）
+- **它与宿主版本的兼容区间** → 见《多机交接与云中继》**§4.5「兼容性要求」**（另见本 README 第七节「兼容性」）
+- **本组件特有的坑与实测** → 见本 README「核心纪律」与「已知限制」两节；本仓的 `_test`/演练脚本即"自证可用"那一环
+- **文档仓地址** → Gitee（镜像）<https://gitee.com/kira905/ops-handoff-design>
+  ｜ GitHub（主）<https://github.com/kira905/ops-handoff-design>
+  （文档仓的组件索引表回指本仓；两仓互链、版本各自独立）
+
+> 设计稿里不写具体仓库地址（写死即死链），实现清单统一收在文档仓的组件索引表里——本仓只负责回链章节。
+
+---
+
 ## 一、这工具治什么病
 
 | 症状 | 它能回答的问题 |
@@ -240,3 +256,23 @@ node _test/test-rollback-index.mjs
 | 影响面分类、停机判据、设备标记 | 内含具体项目与主机名 | 中性默认表 | 用 `FIRSTAID_IMPACT_RULES` / `FIRSTAID_STOP_PATTERNS` / `FIRSTAID_DEVICE_TAGS` 注入 |
 
 **恢复脚本自身、`_archive` 目录名、`restore-*.{cmd,mjs,ps1}` 命名约定、时间轴解析口径 —— 这些是设计语义，未改。**
+
+---
+
+## 相关组件
+
+同属 DSH 生态的伴生组件，各自独立仓、独立版本、许可各自独立；它们都回链到同一份文档仓
+[`ops-handoff-design`](https://github.com/kira905/ops-handoff-design)
+（Gitee 镜像 <https://gitee.com/kira905/ops-handoff-design>）：
+
+| 组件仓 | 做什么 | 与本组件的关系 |
+|---|---|---|
+| `dsh-firstaid` | 零依赖急救台：起不来 / 假死 / 要撤销改动 / 数据被删 | **本仓** |
+| [`dsh-ecosystem-panel`](https://github.com/kira905/dsh-ecosystem-panel) | 只读生态健康面板（六类体检一屏看完） | 日常与应急的分工：它回答**「今天怎么样」**（持续、只读、三色），本仓回答**「现在坏了、下一步做什么」**（一次性、可整段交出去的报告）——而且**面板自己坏了的时候，本仓是它的兜底** |
+| [`dsh-diagnostic-tools`](https://github.com/kira905/dsh-diagnostic-tools) | 依赖闭包 / 解耦体检 + 会话图片附件对账 | 同属"只诊断不动手"，但场景不同：它做**离线专项取证**（升级前后主动跑），本仓做**现场四类症状的分诊**（已经出事时先跑） |
+| [`dsh-butler-archive`](https://github.com/kira905/dsh-butler-archive) | 会话归档管理（列表 / 预览 / 恢复 / 删除 + 可选自动归档） | 本仓「要撤销改动 / 数据被删」两类现场里，最常撞上的就是会话与归档面；本仓只负责**如实标注恢复脚本演练过没有**，不替谁回滚 |
+| [`dsh-session-title-live`](https://github.com/kira905/dsh-session-title-live) | 会话标题随对话实时刷新 + 回合边界状态前缀 | 本仓的体检报告要回答"最近哪些会话没走完"，标题轴是那份清单可读性的来源 |
+| [`dsh-task-board-local`](https://github.com/kira905/dsh-task-board-local) | 自维护任务看板（卡片 = 一次真实会话 + 人工验收闸） | 反过来看：长跑体系的日常编排在它那儿，**出事时它自己也可能卡住**——本仓负责把现场压成一份能交出去的报告 |
+
+> 组件之间**没有代码依赖**，也不共享运行时 —— 之所以互指，是因为它们回答的是同一类人的同一批问题
+> （长期在自有机器上跑 agent：装得下、找得到、看得见、查得清）。谁装谁不装，互不影响。
