@@ -2,6 +2,12 @@
 
 格式遵循 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，版本号遵循[语义化版本](https://semver.org/lang/zh-CN/)。
 
+## [0.1.2] - 2026-10-12
+
+### Changed
+
+- **本轮文档更新（本次发版内容）**：新增**英文 README**（`README.en.md`，与中文 `README.md` 内容对等、章节 1:1）—— 补齐文档仓《发布说明》§4.8「组件仓 README 英文必备」的语言政策欠账（开源主档待办 24）；中文 README 顶部加英文版互链。本轮**无代码与行为改动**（推送内容为改动后的 `README.md` + 新增 `README.en.md`）。
+
 ## [0.1.1] - 2026-09-28
 
 ### Changed
