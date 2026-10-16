@@ -217,8 +217,9 @@ change".
 
 ## 7. Compatibility
 
-| Platform | Status | Notes |
+| Item | Status | Notes |
 |---|---|---|
+| **DSH host `0.2.0-rc.2`** | ✅ **Exercised for real on an isolated instance (2026-10-16)** | `node firstaid.mjs --symptom 1` succeeded under a **separate data root** (rc=1: one anomaly found, and a health report plus a log were produced under that data root). ⚠️ This repository is a **standalone CLI tool** (zero third-party dependencies, imports no `@deepseek-ai/dsh-*` package) ⇒ **it declares no `peerDependencies`** — declaring one would falsely imply a version binding to the host; this row only records the **environment actually exercised** |
 | Windows 10/11 | ✅ measured | Process enumeration uses PowerShell CIM (falling back to wmic / tasklist), ports use `netstat` |
 | macOS | ⚠️ not measured | The path and configuration layers are written portably, but the process/port probes depend on Windows commands and need adaptation |
 | Linux | ⚠️ not measured | Same as above |
@@ -266,15 +267,12 @@ node _test/test-rollback-index.mjs
 
 ## 10. License
 
-This repository is released under the **MIT** license (full text in `LICENSE`): you may freely use,
-modify and redistribute it, **including embedding it in your own closed-source tools and CI**, as long
-as you keep the copyright and license notice.
+This repository is released under **AGPL-3.0-only plus a commercial license** (dual licensing; full text in `LICENSE`).
 
-> **Background note (for transparency)**: an early draft from which this repository was derived once
-> used **AGPL-3.0-only** as a placeholder (a temporary state before the wording was finalised). That
-> placeholder version was **never distributed externally** (never pushed, never released); the first
-> public release is this MIT version. All three places (`LICENSE`, `README`, and the `license` field of
-> `package.json`) have been synchronized to MIT.
+- ⚠️ **AGPL-3.0 does not forbid commercial use by itself**: you may use, modify and redistribute it freely (commercial use included), provided that **if you make a modified version available to others over a network, you must offer the corresponding source under the AGPL as well**;
+- "+ a commercial license" = **dual licensing**: if you need it in a **closed-source** or **commercial** setting (where AGPL's copyleft obligations do not apply), a **commercial license** is available — this repository has no public contact address yet, so **please reach out by opening an issue**.
+
+> **License history (for transparency)**: `v0.1.0` – `v0.1.2` were released under **MIT**; **from `v0.1.3` onward this repository is `AGPL-3.0-only plus a commercial license`**. Licenses cannot be revoked for versions already published under MIT — a license change only binds **future** versions. All three places (`LICENSE`, this section, and the `license` field of `package.json`) are in sync.
 
 ---
 

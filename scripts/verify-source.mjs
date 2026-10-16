@@ -61,7 +61,7 @@ const GENERIC_RULES = [
   {
     id: 'credential-form',
     hint: '凭证形态',
-    re: /\b(?:sk-[A-Za-z0-9_-]{12,}|gho_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,})\b/,
+    re: /\b(?:sk-[A-Za-z0-9_-]{12,}|gho_[A-Za-z0-9]{20,}|github\u005fpat\u005f[A-Za-z0-9_]{20,})\b/,
   },
   {
     id: 'private-key',

@@ -33,7 +33,7 @@ const scriptText = '@echo off\r\nrem 回滚 demo\r\nnode "%~dp0restore-demo-thin
 fs.writeFileSync(path.join(pointDir, 'restore-demo-thing.cmd'), scriptText, 'utf8')
 fs.writeFileSync(path.join(land, 'restore-demo-thing.cmd'), scriptText, 'utf8')
 // 落地目录里另一个脚本：内部代号命名 + 需停守护进程+重启服务
-fs.writeFileSync(path.join(land, 'restore-p9-alpha.cmd'), '@echo off\r\nrem guard-ctl stop\r\nrem service-restart.ps1\r\n', 'utf8')
+fs.writeFileSync(path.join(land, 'restore-p9-alpha.cmd'), '@echo off\r\nrem svc-ctl stop\r\nrem service-restart.ps1\r\n', 'utf8')
 // 一个已归档批次目录（验证第 6 节）
 const batch = path.join(arch, 'desktop-restore-archive-20260914')
 fs.mkdirSync(batch)
@@ -74,7 +74,7 @@ eq('空文本 → 未分类', RI.impactOf('', null, undefined), '未分类')
 eq('第一个命中优先（流水文本优先于脚本正文）', RI.impactOf('docs\\x.md 文档', 'tools\\x.mjs'), 'docs')
 
 console.log('\n[2] 纯函数：前置条件 prereqOf')
-eq('停守护进程 + 重启服务', RI.prereqOf('guard-ctl stop && service-restart.ps1'), '需 停守护进程 + 重启服务')
+eq('停守护进程 + 重启服务', RI.prereqOf('svc-ctl stop && service-restart.ps1'), '需 停守护进程 + 重启服务')
 eq('仅重启', RI.prereqOf('node service-restart.ps1'), '需 重启服务')
 eq('文件级回滚', RI.prereqOf('node restore-x.mjs --apply'), '无需停机（文件级回滚）')
 eq('未读到内容', RI.prereqOf(''), '（未读到脚本内容）')

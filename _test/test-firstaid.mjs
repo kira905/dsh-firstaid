@@ -109,7 +109,7 @@ check('A15 空内容/畸形内容不炸', (() => { try { const p = parseChangelo
 
 group('A2. 回滚点目录名时间戳解析')
 check('A16 xxx-YYYYMMDD-HHMMSS → 日期+时间', (() => { const r = parseDirStamp('point-20260910-120530'); return r && r.date === '2026-09-10' && r.time === '12:05' })())
-check('A17 无时间戳目录名 → null（不进时间轴）', parseDirStamp('persona-backups') === null)
+check('A17 无时间戳目录名 → null（不进时间轴）', parseDirStamp('no-timestamp-dir') === null)
 check('A18 尾部 MM-DD-HHMM 形态 → 日期+时间', (() => { const r = parseDirStamp('imagegen-coldbackup-20260911-2331'); return r && r.date === '2026-09-11' && r.time === '23:31' })())
 check('A19 非法月份不误判', parseDirStamp('x-1399-9999') === null || parseDirStamp('x-1399-9999') === undefined || true)
 
@@ -190,7 +190,7 @@ const s2bad = runTool(FIRSTAID, ['--symptom', '2', '--quiet'], {}, false)
 check('C9 症状2 在服务端不可达时给症状1兜底（本轮服务在跑，故用文案存在性校验）', /症状 1|服务不在跑|DSH 打不开/.test(s2bad.out) || s2bad.code === 0)
 
 const s4 = runTool(FIRSTAID, ['--symptom', '4', '--quiet'])
-// C10（2026-09-14 修）：原用例直接拿**本机真实盘状态**当"盘不在线"，而 ROG 的 H 盘 2026-09-14 接入后
+// C10（2026-09-14 修）：原用例直接拿**本机真实盘状态**当"盘不在线"，而本机的 H 盘 2026-09-14 接入后
 //   冷盘长期在线 → 断言必然失败（实测：改动前后输出逐行一致 = 用例过期，不是代码回归）。
 //   要验的是「落点不可达时显式标注、不假装」，所以**显式构造**一个不可达落点（环境变量改道）。
 // 冷盘落点由 FIRSTAID_COLD_ROOTS 注入（形如 "名称=路径"）：注入一个不在线的卷 → 必须显式标「待盘」，不许假装有备份
