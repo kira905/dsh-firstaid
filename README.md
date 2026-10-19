@@ -74,6 +74,11 @@ node --version        # 需要 Node 18+（本工具只用内置模块，无构�
 **第 2 步 · 取到本地**
 
 ```bash
+# 方式 A（推荐）：从 npm 装（装完直接用 firstaid / firstaid-drill / firstaid-timeline / firstaid-rollback-index）
+npm install -g @kira905/dsh-firstaid
+firstaid --list                   # 看到症状菜单就算装好了
+
+# 方式 B：从 git 克隆（要改源码 / 不想全局装时）
 git clone https://github.com/kira905/dsh-firstaid.git firstaid
 # 国内镜像：git clone https://gitee.com/kira905/dsh-firstaid.git firstaid
 cd firstaid

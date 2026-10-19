@@ -1,7 +1,6 @@
 {
-  "name": "firstaid",
+  "name": "@kira905/dsh-firstaid",
   "version": "0.1.3",
-  "private": true,
   "type": "module",
   "description": "只读诊断 + 回滚演练的急救台：把「起不来 / 假死 / 要撤销改动 / 数据被删」压成一个入口，产出可整段交给 AI 或同事的现场体检报告（零第三方依赖）",
   "license": "AGPL-3.0-only",
@@ -42,8 +41,22 @@
     "runbook",
     "rollback",
     "drill",
-    "zero-dependency"
+    "zero-dependency",
+    "dsh",
+    "deepseek-harness",
+    "dsh-plugin"
   ],
   "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": {},
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kira905/dsh-firstaid.git"
+  },
+  "homepage": "https://github.com/kira905/dsh-firstaid#readme",
+  "bugs": {
+    "url": "https://github.com/kira905/dsh-firstaid/issues"
+  }
 }

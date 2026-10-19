@@ -84,6 +84,11 @@ node --version        # Node 18+ required (this tool uses built-in modules only;
 **Step 2 · Get it locally**
 
 ```bash
+# Route A (recommended): install from npm (then use firstaid / firstaid-drill / firstaid-timeline / firstaid-rollback-index)
+npm install -g @kira905/dsh-firstaid
+firstaid --list           # if you see the symptom menu, it is installed
+
+# Route B: clone from git (when you want to edit the source, or avoid a global install)
 git clone https://github.com/kira905/dsh-firstaid.git firstaid
 # mirror in China: git clone https://gitee.com/kira905/dsh-firstaid.git firstaid
 cd firstaid
