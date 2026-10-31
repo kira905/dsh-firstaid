@@ -161,7 +161,7 @@ export function stripNoisePrefix(text, depth = 0) {
   t = t.replace(/^[\s*]*(?:设备|主机|机器)\s*[:：]\s*[^\s，,、｜|：:】\]]{1,12}[\s*]*(?:[\]】)]\s*)?/, '') // 设备：WS-01】 / 设备：工作 WS-01
   const tags = resolveDeviceTags()
   if (tags.length) {
-    // 注入的设备短码（例如残留形态 `WS-01]` / 【设备：WS-01】）
+    // 注入的设备短码（例如残留形态 `WS-01]` / 方头括号里的设备标）
     const re = new RegExp('^[\\s*]*(?:' + tags.map(escapeRe).join('|') + ')\\s*(?:\\]|】|\\))?\\s*', 'i')
     t = t.replace(re, '')
   }
@@ -598,7 +598,7 @@ export function buildTimeline({ days = 7, now = new Date(), includeArchive = tru
   }
 }
 
-/** 条目标题：去掉 [标记]/粗体/【设备：xxx】 之类的噪声前缀，截到 84 字符
+/** 条目标题：去掉 [标记]/粗体/设备标 之类的噪声前缀，截到 84 字符
  *  （流水里常见 `- 22:06 [标记] 说明…` —— 段首方括号可能被前导分隔符吃掉，故此处允许残留 `]` 一起清掉） */
 export function titleOf(e) {
   let t = String(e.fields[0] || e.text || '')
