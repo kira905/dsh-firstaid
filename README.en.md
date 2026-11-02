@@ -1,5 +1,33 @@
 # dsh-firstaid
 
+> ### What this is
+> **A read-only incident console** for long-running agent hosts: it will not start, the UI hangs, you need to undo a change, or data got deleted — four kinds of on-site trouble, collapsed into **one entry point**.
+>
+> ### What it solves
+> When a long-running assistant breaks, what you lack is not repair options but **evidence**: is the service down, is the port taken, or was it the change you just made? This collects processes, ports, state files, log tails, crash counts and recent changes in one pass, proposes three actions, and writes a **hand-off-ready on-site report**.
+>
+> ### Run it in one command
+> ```powershell
+> npm i -g @kira905/dsh-firstaid
+> firstaid --list            # the symptom menu
+> firstaid --symptom 5       # "no idea what happened" -> build a full check-up bundle
+> ```
+>
+> ### Real output
+> ```text
+> firstaid v0.1 (read-only diagnostics, zero dependencies) - one entry point when things break
+> Symptoms:
+>   1) won't start        -> daemons, ports, state files, log tail, crash count -> three suggested actions
+>   2) UI hangs           -> connection-pool and process diagnosis
+>   3) undo a change      -> change timeline (pick an index to roll back; no backup = red, action blocked)
+>   4) data was deleted   -> points at cold-disk and mirror backups, states the recoverable range
+>   5) no idea what broke -> one-shot check-up bundle, hand it to an agent
+> ```
+>
+> **Read-only by default.** Install steps and three read-only self-checks are below.
+
+---
+
 > **Status**: published (Gitee + GitHub)
 > **Repository**: <https://github.com/kira905/dsh-firstaid> ｜ <https://gitee.com/kira905/dsh-firstaid>
 > **License**: MIT — see [`LICENSE`](./LICENSE)
